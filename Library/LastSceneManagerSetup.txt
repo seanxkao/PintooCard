@@ -1,7 +1,7 @@
 sceneSetups:
 - path: Assets/Scene/main_menu.unity
-  isLoaded: 1
-  isActive: 1
-- path: Assets/Scene/puzzle_mode.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/Scene/puzzle_mode.unity
+  isLoaded: 1
+  isActive: 1
