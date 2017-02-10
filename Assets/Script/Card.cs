@@ -101,7 +101,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     protected virtual void Start()
     {
         //auto scale with screen size
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 9 - 20, Screen.width / 6 - 20);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 5, Screen.width / 2 - 5);
         edge = new edgeblock();
         Card_init(rank);
     }

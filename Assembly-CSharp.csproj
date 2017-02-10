@@ -50,6 +50,7 @@
      <Compile Include="Assets\Script\Deck.cs" />
      <Compile Include="Assets\Script\Hands.cs" />
      <Compile Include="Assets\Script\Manager.cs" />
+     <Compile Include="Assets\Script\MapController.cs" />
      <Compile Include="Assets\Script\Messagebox.cs" />
      <Compile Include="Assets\Script\PauseMessagebox.cs" />
      <Compile Include="Assets\Script\SelectRuleMessagebox.cs" />

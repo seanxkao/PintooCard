@@ -23,11 +23,11 @@ public class Hands : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 		cards = GetComponentsInChildren<Card> ();
 		Array.Sort (cards, (Card a, Card b) => a.transform.position.x.CompareTo(b.transform.position.x));
 		Vector2 deckSize = transform.GetChild (0).GetComponent<RectTransform> ().sizeDelta;
-		deckSize.Set(Screen.width, deckSize.y);
+		deckSize.Set(Screen.width * 3, deckSize.y);
 		transform.GetChild (0).GetComponent<RectTransform> ().sizeDelta = deckSize;
 
 		Vector2 handSize = GetComponent<RectTransform> ().sizeDelta;
-		handSize.Set(handSize.x, (Screen.width / 6 + 10));
+		handSize.Set(handSize.x, (Screen.width / 2 + 10));
 		GetComponent<RectTransform> ().sizeDelta = handSize;
 	}
 

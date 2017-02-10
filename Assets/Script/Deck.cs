@@ -12,7 +12,7 @@ public class Deck : MonoBehaviour
 
 	public virtual void Start(){
 		//adjust size with respect to screen size
-		GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width/9-10, Screen.width/6-10);
+		GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width/3, Screen.width/2);
 		setWrong (false);
 	}
 

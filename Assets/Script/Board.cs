@@ -26,8 +26,8 @@ public class Board : MonoBehaviour {
 		//fixed col
 		win = false;
 		GetComponent<GridLayoutGroup>().constraintCount = col;
-		GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (Screen.width / 9-10, Screen.width / 6 -10);
-		GetComponent<RectTransform> ().sizeDelta = new Vector2 (Screen.width / 3+90, Screen.width / 2+90);
+		GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (Screen.width / 3, Screen.width / 2);
+		GetComponent<RectTransform> ().sizeDelta = new Vector2 (Screen.width, Screen.width /3*2);
 		deck= new Deck[row, col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
