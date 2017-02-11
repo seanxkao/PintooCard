@@ -16,10 +16,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     public Transform originalParent;
-    [SerializeField]
-    private int rank; //1~13
-    [SerializeField]
-	private string color; //spade, heart, diamond, club
+    [SerializeField]	private int rank; //1~13
+    [SerializeField]	private string color; //spade, heart, diamond, club
     private edgeblock edge;
     //private int up, right, down, left;
 
@@ -153,9 +151,14 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("OnDrag");
-        this.transform.position = eventData.position;
+		this.transform.position = eventData.position;
 
-    }
+		float scale = 1f;
+		if(MapController.main().contains(eventData.position)){
+			scale = MapController.main ().getScale ();
+		}
+		this.transform.localScale = Vector2.Lerp(transform.localScale, Vector2.one*scale, 0.5f);
+	}
 
     public void OnEndDrag(PointerEventData eventData)
 	{
@@ -178,6 +181,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         //oddbug later i'll fix
         this.transform.SetParent(originalParent);
         transform.localPosition = Vector2.zero;
+		transform.localScale = Vector2.one;
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }

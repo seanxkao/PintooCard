@@ -4,22 +4,14 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour {
-	[SerializeField]
-	protected int row;
-	[SerializeField]
-	protected int col;
-	[SerializeField]
-	protected Deck deckP;
-	protected Deck[,] deck;
-	protected const int deckWidth = 40;
-	protected const int deckHeight = 60;
-	[SerializeField]
-	protected Messagebox messagebox;
-	[SerializeField]
-	protected Text ruleText;
+	[SerializeField]	protected int row;
+	[SerializeField]	protected int col;
+	[SerializeField]	protected Deck deckP;
+	[SerializeField]	protected Messagebox messagebox;
+	[SerializeField]	protected Text ruleText;
+	[SerializeField]	protected int rule;
 
-	[SerializeField]
-	protected int rule;
+	protected Deck[,] deck;
 	protected bool win;
 
 	protected virtual void Start () {

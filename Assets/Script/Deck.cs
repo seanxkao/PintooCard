@@ -16,6 +16,10 @@ public class Deck : MonoBehaviour
 		setWrong (false);
 	}
 
+	public void setSize(Vector2 size){
+		GetComponent<RectTransform>().sizeDelta = size;
+	}
+
 	public void setCard(Card c){
 		this.c = c;
 	}
