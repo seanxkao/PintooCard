@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class Board : MonoBehaviour {
 	[SerializeField]	protected int row;
@@ -15,6 +16,7 @@ public class Board : MonoBehaviour {
 	protected bool win;
 
 	protected virtual void Start () {
+		EventSystem.current.RaycastAll(;
 		//fixed col
 		win = false;
 		GetComponent<GridLayoutGroup>().constraintCount = col;
