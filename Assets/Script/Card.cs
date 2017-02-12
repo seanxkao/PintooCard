@@ -103,6 +103,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 5, Screen.width / 2 - 5);
         edge = new edgeblock();
         Card_init(rank);
+        scroll = GameObject.Find("ScrollView");
     }
 
     //for debug
@@ -176,9 +177,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 				//nothing here. or already another card on deck.
 				//go back to old deck.
 				int childcount = scroll.transform.childCount;
+
+               
                 for (int i = 0; i < childcount; i++)
                 {    
                     Deck handsdeck = scroll.transform.GetChild(i).GetComponent<Deck>();
+                    Debug.Log(handsdeck);
                     if (handsdeck.card() == null)
                     {
                         originalParent = handsdeck.transform;
