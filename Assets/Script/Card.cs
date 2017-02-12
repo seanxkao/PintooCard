@@ -20,7 +20,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField]	private string color; //spade, heart, diamond, club
     private edgeblock edge;
     //private int up, right, down, left;
-
+	
+	private GameObject scroll;
 
 
     public void Card_init(int rank)
@@ -174,7 +175,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			} else {
 				//nothing here. or already another card on deck.
 				//go back to old deck.
-				originalParent.GetComponent<Deck> ().setCard (this);
+				int childcount = scroll.transform.childCount;
+                for (int i = 0; i < childcount; i++)
+                {    
+                    Deck handsdeck = scroll.transform.GetChild(i).GetComponent<Deck>();
+                    if (handsdeck.card() == null)
+                    {
+                        originalParent = handsdeck.transform;
+                        handsdeck.setCard(this);
+                        break;
+                    }
+                }
 			}
 		}
 
