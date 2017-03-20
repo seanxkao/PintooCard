@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
-	[SerializeField]
-	protected Card c;
-	[SerializeField]
-	protected bool wrong;
+	[SerializeField]	protected Card c;
+	[SerializeField]	protected bool wrong;
 
 	public virtual void Start(){
 		//adjust size with respect to screen size

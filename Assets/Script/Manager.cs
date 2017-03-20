@@ -30,11 +30,11 @@ public class Manager : MonoBehaviour {
 
 	public void loadPuzzleMode(int rule){
 		this.rule = rule;
-		SceneManager.LoadScene ("puzzle_mode");
+		loadPuzzleMode ();
 	}
 
 	public void loadPuzzleMode(){
-		SceneManager.LoadScene ("puzzle_mode");
+		SceneManager.LoadScene ("puzzle_mode_9x9");
 	}
 
 	public void loadMainMenu(){

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public enum EdgeColor { RED, YELLOW, GREEN, BLUE }
 public enum EdgePos { LEFT, RIGHT } //{counterclockwise, clockwise}
+public enum CardSuit{SPADE, DIAMOND, HEART, CLUB}
 
 public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -16,17 +17,19 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     public Transform originalParent;
-    [SerializeField]	private int rank; //1~13
-    [SerializeField]	private string color; //spade, heart, diamond, club
-    private edgeblock edge;
+	private edgeblock edge;
+	[SerializeField]	private int rank; //1~13
+	[SerializeField]	private CardSuit suit; //spade, heart, diamond, club
     //private int up, right, down, left;
 
 
 
-    public void Card_init(int rank)
+    public void Card_init(CardSuit suit, int rank)
     {
         //type 1 red, yellow, green, blue
         //type 2 green, blue, red, yellow
+		edge = new edgeblock();
+		this.suit = suit;
         this.rank = rank;
         //init color
         this.edge.color[0] = EdgeColor.RED;
@@ -99,9 +102,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     protected virtual void Start()
     {
         //auto scale with screen size
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 5, Screen.width / 2 - 5);
-        edge = new edgeblock();
-        Card_init(rank);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 10, Screen.width / 2 - 10);
     }
 
     //for debug
@@ -139,7 +140,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+        //Debug.Log("OnBeginDrag");
 
         //save old deck.
         originalParent = this.transform.parent;
@@ -150,7 +151,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
+        //Debug.Log("OnDrag");
 		this.transform.position = eventData.position;
 
 		float scale = 1f;
@@ -162,7 +163,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
 	{
-		Debug.Log("OnEndDrag");
+		//Debug.Log("OnEndDrag");
 		GameObject deckObject = eventData.pointerCurrentRaycast.gameObject;
 		if (deckObject != null) {
 			Deck deck = deckObject.GetComponent<Deck> ();

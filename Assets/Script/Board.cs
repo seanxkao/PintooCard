@@ -20,18 +20,18 @@ public class Board : MonoBehaviour {
 		GetComponent<GridLayoutGroup>().constraintCount = col;
 		GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (Screen.width / 3, Screen.width / 2);
 		GetComponent<RectTransform> ().sizeDelta = new Vector2 (Screen.width, Screen.width /3*2);
-		deck= new Deck[row, col];
+		deck = new Deck[row, col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				deck[i, j] = (Deck)Instantiate (deckP);
-				deck [i, j].transform.SetParent (transform, false);
+				deck[i, j].transform.SetParent (transform, false);
 			}
 		}
-		setRule (Manager.manager().getRule());
+		setRule(Manager.manager().getRule());
 	}
 
 	public virtual void setRule(int rule){
-		Debug.Log ("set rule");
+		//Debug.Log ("set rule");
 		this.rule = rule;
 		switch (rule) {
 		case 0:
@@ -100,6 +100,12 @@ public class Board : MonoBehaviour {
 		}
 	}
 
+	public int getRow(){
+		return row;
+	}
+	public int getCol(){
+		return col;
+	}
 
 	protected virtual void Update(){
 		check ();

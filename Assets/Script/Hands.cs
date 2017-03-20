@@ -11,24 +11,35 @@ public enum HandsState{
 }
 
 public class Hands : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler  {
-	[SerializeField]
-	protected Card[] cards;
+	[SerializeField]	protected Deck deckP;
+	[SerializeField]	protected CardSuit[] cardSuits;
+	[SerializeField]	protected HandsState state;
+
+	protected RectTransform rectTransform;
 	protected Vector2 touchPos;
 	protected int threshold;
-	[SerializeField]
-	protected HandsState state;
+	protected RectTransform scroll;
 
 	void Start () {
 		threshold = 30;
-		cards = GetComponentsInChildren<Card> ();
-		Array.Sort (cards, (Card a, Card b) => a.transform.position.x.CompareTo(b.transform.position.x));
-		Vector2 deckSize = transform.GetChild (0).GetComponent<RectTransform> ().sizeDelta;
-		deckSize.Set(Screen.width * 3, deckSize.y);
-		transform.GetChild (0).GetComponent<RectTransform> ().sizeDelta = deckSize;
+		rectTransform = GetComponent<RectTransform> ();
+		scroll = (RectTransform)transform.GetChild (0);
+		//spawn decks and cards
+		foreach (CardSuit suit in cardSuits) {
+			for (int i = 1; i <= 9; i++) {
+				Deck deck = (Deck)Instantiate (deckP, scroll);
+				Card card = GetComponent<CardSpawner> ().spawnCard (suit, i);
+				card.transform.SetParent (deck.transform);
+			}
+		}
 
-		Vector2 handSize = GetComponent<RectTransform> ().sizeDelta;
+		Vector2 deckSize = scroll.sizeDelta;
+		deckSize.Set(Screen.width / 3 * cardSuits.Length * 9, deckSize.y);
+		scroll.sizeDelta = deckSize;
+
+		Vector2 handSize = rectTransform.sizeDelta;
 		handSize.Set(handSize.x, (Screen.width / 2 + 10));
-		GetComponent<RectTransform> ().sizeDelta = handSize;
+		rectTransform.sizeDelta = handSize;
 	}
 
 	public virtual HandsState getState(){

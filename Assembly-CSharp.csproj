@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Board.cs" />
      <Compile Include="Assets\Script\Card.cs" />
+     <Compile Include="Assets\Script\CardSpawner.cs" />
      <Compile Include="Assets\Script\Deck.cs" />
      <Compile Include="Assets\Script\Hands.cs" />
      <Compile Include="Assets\Script\Manager.cs" />
