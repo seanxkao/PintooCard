@@ -10,16 +10,18 @@ public class Board : MonoBehaviour {
 	[SerializeField]	protected Messagebox messagebox;
 	[SerializeField]	protected Text ruleText;
 	[SerializeField]	protected int rule;
+	protected GridLayoutGroup grid;
 
 	protected Deck[,] deck;
 	protected bool win;
 
 	protected virtual void Start () {
 		//fixed col
+		grid = GetComponent<GridLayoutGroup>();
 		win = false;
-		GetComponent<GridLayoutGroup>().constraintCount = col;
-		GetComponent<GridLayoutGroup> ().cellSize = new Vector2 (Screen.width / 3, Screen.width / 2);
-		GetComponent<RectTransform> ().sizeDelta = new Vector2 (Screen.width, Screen.width /3*2);
+		grid.constraintCount = col;
+		grid.cellSize = new Vector2 (Screen.width / 3, Screen.width / 2);
+		GetComponent<RectTransform> ().sizeDelta = new Vector2 (row * (grid.cellSize.x + grid.spacing.x), col * (grid.cellSize.y + grid.spacing.y));
 		deck = new Deck[row, col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
@@ -28,6 +30,11 @@ public class Board : MonoBehaviour {
 			}
 		}
 		setRule(Manager.manager().getRule());
+	}
+
+	public Vector3 getRealSize(){
+		return RectTransformUtility.CalculateRelativeRectTransformBounds(GetComponent<RectTransform>().root, GetComponent<RectTransform>()).size;
+
 	}
 
 	public virtual void setRule(int rule){

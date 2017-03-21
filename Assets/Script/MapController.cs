@@ -11,7 +11,8 @@ public class MapController : MonoBehaviour {
 
 	protected RectTransform rectTransform;
 
-	protected Vector2 frameSize;
+	protected Vector2 realSize;
+	protected Vector2 frameRealSize;
 	protected Vector2 mapSize;
 
 	protected Vector2 startMapPos;			//position of map when dragging start
@@ -33,9 +34,13 @@ public class MapController : MonoBehaviour {
 		m = this;
 
 		rectTransform = GetComponent<RectTransform> ();
+		rectTransform.sizeDelta = new Vector2 (Screen.width-20, Screen.height/2);
 		startTouchPos = new Vector2[2];
 		currentTouchPos = new Vector2[2];
-		frameSize = RectTransformUtility.CalculateRelativeRectTransformBounds(transform).size;
+		//frameRealSize = Camera.main.ScreenToWorldPoint(board.GetComponent<Board>().getRealSize());
+		frameRealSize = board.sizeDelta;
+		//realSize = Camera.main.ScreenToWorldPoint(rectTransform.sizeDelta);
+		realSize = rectTransform.sizeDelta;
 		currentMapPos = Vector2.zero;
 		scale = 1f;
 		isDragging = false;
@@ -93,16 +98,16 @@ public class MapController : MonoBehaviour {
 				if (!float.Equals (Input.GetTouch (0).deltaTime, 0f)) {
 					//move speed 
 					float moveSpeed = Mathf.Clamp(scale, 1f, Mathf.Infinity);
-					currentMapPos += screenToWorldVector (Input.GetTouch (0).deltaPosition) * Time.deltaTime / Input.GetTouch (0).deltaTime * moveSpeed;
+					currentMapPos += Input.GetTouch (0).deltaPosition * Time.deltaTime / Input.GetTouch (0).deltaTime * moveSpeed;
 
-					Vector2 test = Camera.main.ScreenToWorldPoint(RectTransformUtility.CalculateRelativeRectTransformBounds(board).size);
-
-					//Vector2 moveBound = new Vector2 (Mathf.Abs(board.sizeDelta.x/2), Mathf.Abs(board.sizeDelta.y/2));
-					Vector2 moveBound = new Vector2 (Mathf.Abs(test.x/2), Mathf.Abs(test.y/2));
-
+					//Vector2 moveBound = new Vector2 (Mathf.Abs(realSize.x), Mathf.Abs(realSize.y));
+					Vector2 moveBound = (board.sizeDelta *scale-rectTransform.sizeDelta)/2;
+					moveBound.x = Mathf.Abs (moveBound.x);
+					moveBound.y = Mathf.Abs (moveBound.y);
 					currentMapPos.x = Mathf.Clamp (currentMapPos.x, -moveBound.x, moveBound.x);
 					currentMapPos.y = Mathf.Clamp (currentMapPos.y, -moveBound.y, moveBound.y);
-					board.position = Camera.main.WorldToScreenPoint (currentMapPos);
+
+					board.anchoredPosition = currentMapPos;
 				}
 
 
@@ -122,12 +127,12 @@ public class MapController : MonoBehaviour {
 				Vector2 moveA;
 				Vector2 moveB;
 				if (!float.Equals (Input.GetTouch (0).deltaTime, 0f)) {
-					moveA = screenToWorldVector (Input.GetTouch (0).deltaPosition) * Time.deltaTime / Input.GetTouch (0).deltaTime * moveSpeed;
+					moveA = Input.GetTouch (0).deltaPosition * Time.deltaTime / Input.GetTouch (0).deltaTime * moveSpeed;
 				} else {
 					moveA = Vector2.zero;
 				}
 				if (!float.Equals (Input.GetTouch (1).deltaTime, 0f)) {
-					moveB = screenToWorldVector (Input.GetTouch (1).deltaPosition) * Time.deltaTime / Input.GetTouch (1).deltaTime * moveSpeed;
+					moveB = Input.GetTouch (1).deltaPosition * Time.deltaTime / Input.GetTouch (1).deltaTime * moveSpeed;
 				} else {
 					moveB = Vector2.zero;
 				}
@@ -135,11 +140,12 @@ public class MapController : MonoBehaviour {
 
 				//let the map stays inside the screen
 				//Vector2 moveBound = new Vector2 (Mathf.Abs(frameSize.x * (scale - 1f)), Mathf.Abs(frameSize.y * (scale - 1f)));
-				Vector2 moveBound = new Vector2 (Mathf.Abs(board.sizeDelta.x/2), Mathf.Abs(board.sizeDelta.y/2));
+
+				Vector2 moveBound = new Vector2 (Mathf.Abs(realSize.x), Mathf.Abs(realSize.y));
 
 				currentMapPos.x = Mathf.Clamp (currentMapPos.x, -moveBound.x, moveBound.x);
 				currentMapPos.y = Mathf.Clamp (currentMapPos.y, -moveBound.y, moveBound.y);
-				board.position = Camera.main.WorldToScreenPoint (currentMapPos);
+				board.localPosition = currentMapPos;
 			}
 		}
 	
