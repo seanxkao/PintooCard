@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/puzzle_mode_9x9.unity
+- path: Assets/Scene/main_menu.unity
   isLoaded: 1
   isActive: 1
