@@ -6,6 +6,8 @@ public class Manager : MonoBehaviour {
 	protected static Manager m;
 	protected int rule;
 
+	[SerializeField] protected MapInfo mapInfo;
+
 	public static Manager manager(){
 		return m;
 	}
@@ -43,5 +45,13 @@ public class Manager : MonoBehaviour {
 
 	public int getRule(){
 		return rule;
+	}
+
+	public MapInfo getMapInfo(){
+		return mapInfo;
+	}
+
+	public void setMapInfo(MapInfo mapInfo){
+		this.mapInfo = mapInfo;
 	}
 }

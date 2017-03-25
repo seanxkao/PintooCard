@@ -16,11 +16,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         public EdgePos[] pos = new EdgePos[4]; // trend to {counterclockwise, clockwise}
     }
 
-    public Transform originalParent;
-	private edgeblock edge;
-	[SerializeField]	private int rank; //1~13
+    [SerializeField]	private int rank; //1~13
 	[SerializeField]	private CardSuit suit; //spade, heart, diamond, club
-    //private int up, right, down, left;
+	public Transform originalParent;
+	private edgeblock edge;
+	protected bool draggable;
+
+	//private int up, right, down, left;
 
 
 
@@ -102,8 +104,18 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     protected virtual void Start()
     {
         //auto scale with screen size
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 10, Screen.width / 2 - 10);
-    }
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width /3 - 20, Screen.width / 2 - 30);
+		draggable = true;
+	}
+
+	protected virtual void Update(){
+		if(Input.touchCount>=2){
+			draggable = false;
+		}
+		else if(Input.touchCount==0){
+			draggable = true;
+		}
+	}
 
     //for debug
     public static int match(Card a, int i1, Card b, int i2)
@@ -143,6 +155,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         //Debug.Log("OnBeginDrag");
 
         //save old deck.
+
+		if (!draggable)
+			return;
+
         originalParent = this.transform.parent;
         originalParent.GetComponent<Deck>().setCard(null);
         transform.SetParent(transform.root);
@@ -152,8 +168,15 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("OnDrag");
+		if (!draggable) {
+			originalParent.GetComponent<Deck> ().setCard (this);
+			this.transform.SetParent(originalParent);
+			transform.localPosition = Vector2.zero;
+			transform.localScale = Vector2.one;
+			GetComponent<CanvasGroup>().blocksRaycasts = true;
+			return;
+		}
 		this.transform.position = eventData.position;
-
 		float scale = 1f;
 		if(MapController.main().contains(eventData.position)){
 			scale = MapController.main ().getScale ();
@@ -163,11 +186,19 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
 	{
+		if (!draggable) {
+			originalParent.GetComponent<Deck> ().setCard (this);
+			this.transform.SetParent(originalParent);
+			transform.localPosition = Vector2.zero;
+			transform.localScale = Vector2.one;
+			GetComponent<CanvasGroup>().blocksRaycasts = true;
+			return;
+		}
 		//Debug.Log("OnEndDrag");
 		GameObject deckObject = eventData.pointerCurrentRaycast.gameObject;
 		if (deckObject != null) {
 			Deck deck = deckObject.GetComponent<Deck> ();
-			if (deck != null && deck.card () == null) {
+			if (deck != null && deck.card () == null && deck.getEnable()) {
 				//deck exist, no other card on deck.
 				//go to new deck.
 				originalParent = deck.transform;
