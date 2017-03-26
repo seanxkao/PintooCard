@@ -1,18 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Hands.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Board.cs">
     <Files>
-      <File FileName="Assets\Script\MapController.cs" Line="37" Column="14" />
-      <File FileName="Assets\Script\Board.cs" Line="31" Column="42" />
-      <File FileName="Assets\Script\Hands.cs" Line="27" Column="18" />
-      <File FileName="Assets\Script\Deck.cs" Line="13" Column="19" />
-      <File FileName="Assets\Script\Card.cs" Line="202" Column="41" />
-      <File FileName="Assets\Script\CardSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Manager.cs" Line="47" Column="10" />
-      <File FileName="Assets\Script\Messagebox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\SelectRuleMessagebox.cs" Line="6" Column="21" />
-      <File FileName="Assets\Script\SelectMapMessageBox.cs" Line="12" Column="48" />
-      <File FileName="Assets\Script\MapInfo.cs" Line="51" Column="16" />
+      <File FileName="Assets\Script\Board.cs" Line="47" Column="42" />
+      <File FileName="Assets\Script\Hands.cs" Line="49" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

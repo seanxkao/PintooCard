@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Messagebox : MonoBehaviour {
-	[SerializeField]
-	protected Button[] buttons;
+	[SerializeField]	protected Button[] buttons;
 
 	public virtual void showMessage(string text){
 		gameObject.SetActive (true);

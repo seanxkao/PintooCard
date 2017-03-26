@@ -4,15 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 	protected static Manager m;
+	protected MapInfo mapInfo;
 	protected int rule;
 
-	[SerializeField] protected MapInfo mapInfo;
-
-	public static Manager manager(){
-		return m;
-	}
-
 	void Awake(){
+		//Manager is singleton.
+		//destroy it self if there is already an instance
 		if (m != null) {
 			Destroy (gameObject);
 		} else {
@@ -26,17 +23,21 @@ public class Manager : MonoBehaviour {
 		SceneManager.sceneLoaded -= onSceneLoaded;
 	} 
 
-	public void onSceneLoaded(Scene scene, LoadSceneMode loadSceneMode){
+	public static Manager manager(){
+		return m;
+	}
 
+	public void onSceneLoaded(Scene scene, LoadSceneMode loadSceneMode){
+		//currently useless
+	}
+		
+	public void loadPuzzleMode(){
+		SceneManager.LoadScene ("puzzle_mode");
 	}
 
 	public void loadPuzzleMode(int rule){
 		this.rule = rule;
 		loadPuzzleMode ();
-	}
-
-	public void loadPuzzleMode(){
-		SceneManager.LoadScene ("puzzle_mode_9x9");
 	}
 
 	public void loadMainMenu(){

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour {
 	[SerializeField] protected Card cardP;
-
 	[SerializeField] protected Sprite[] spadeSprite;
 	[SerializeField] protected Sprite[] diamondSprite;
 	[SerializeField] protected Sprite[] heartSprite;
@@ -27,15 +26,5 @@ public class CardSpawner : MonoBehaviour {
 		}
 		card.GetComponent<Image> ().sprite = sprite;
 		return card;
-	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

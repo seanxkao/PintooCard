@@ -12,19 +12,15 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private class edgeblock
     {
         //(up, right, down, left) = index(0, 1, 2, 3)
-        public EdgeColor[] color = new EdgeColor[4]; // red, yellow, green, blue
-        public EdgePos[] pos = new EdgePos[4]; // trend to {counterclockwise, clockwise}
+        public EdgeColor[] color = new EdgeColor[4]; 	// red, yellow, green, blue
+        public EdgePos[] pos = new EdgePos[4]; 			// trend to {counterclockwise, clockwise}
     }
 
-    [SerializeField]	private int rank; //1~13
-	[SerializeField]	private CardSuit suit; //spade, heart, diamond, club
+    [SerializeField]	private int rank; 		//1~13
+	[SerializeField]	private CardSuit suit;	//spade, heart, diamond, club
 	public Transform originalParent;
 	private edgeblock edge;
 	protected bool draggable;
-
-	//private int up, right, down, left;
-
-
 
     public void Card_init(CardSuit suit, int rank)
     {
@@ -109,6 +105,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	}
 
 	protected virtual void Update(){
+		//if play touches with 2 finger, move the map, not the card
 		if(Input.touchCount>=2){
 			draggable = false;
 		}
@@ -117,7 +114,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 	}
 
-    //for debug
+
     public static int match(Card a, int i1, Card b, int i2)
     {
         //(up, right, down, left) = index(0, 1, 2, 3)
@@ -148,17 +145,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
         }
     }
-
-
+		
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnBeginDrag");
-
-        //save old deck.
-
-		if (!draggable)
+		if (!draggable) {
 			return;
-
+		}
+		//save old deck.
         originalParent = this.transform.parent;
         originalParent.GetComponent<Deck>().setCard(null);
         transform.SetParent(transform.root);
@@ -167,7 +160,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnDrag");
 		if (!draggable) {
 			originalParent.GetComponent<Deck> ().setCard (this);
 			this.transform.SetParent(originalParent);
@@ -177,6 +169,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			return;
 		}
 		this.transform.position = eventData.position;
+		//adjust Card scale when moving on map
 		float scale = 1f;
 		if(MapController.main().contains(eventData.position)){
 			scale = MapController.main ().getScale ();
@@ -194,7 +187,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			GetComponent<CanvasGroup>().blocksRaycasts = true;
 			return;
 		}
-		//Debug.Log("OnEndDrag");
+
 		GameObject deckObject = eventData.pointerCurrentRaycast.gameObject;
 		if (deckObject != null) {
 			Deck deck = deckObject.GetComponent<Deck> ();
@@ -203,18 +196,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 				//go to new deck.
 				originalParent = deck.transform;
 				deck.setCard (this);
-			} else {
+			}
+			else {
 				//nothing here. or already another card on deck.
 				//go back to old deck.
 				originalParent.GetComponent<Deck> ().setCard (this);
 			}
 		}
 
-        //oddbug later i'll fix
         this.transform.SetParent(originalParent);
         transform.localPosition = Vector2.zero;
 		transform.localScale = Vector2.one;
-
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
