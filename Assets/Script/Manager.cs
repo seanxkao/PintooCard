@@ -6,8 +6,9 @@ public class Manager : MonoBehaviour {
 	protected static Manager m;
 	protected MapInfo mapInfo;
 	protected int rule;
+	protected int skin; //0:Original, 1:V_butterfly
 
-	void Awake(){
+    void Awake(){
 		//Manager is singleton.
 		//destroy it self if there is already an instance
 		if (m != null) {
@@ -47,11 +48,15 @@ public class Manager : MonoBehaviour {
 	public int getRule(){
 		return rule;
 	}
-
+	public int getSkin(){
+		return skin;
+	}
+	public void setSkin(int skin){
+		this.skin = skin;
+	}
 	public MapInfo getMapInfo(){
 		return mapInfo;
 	}
-
 	public void setMapInfo(MapInfo mapInfo){
 		this.mapInfo = mapInfo;
 	}
