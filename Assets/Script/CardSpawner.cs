@@ -39,7 +39,11 @@ public class CardSpawner : MonoBehaviour {
             //no difference between suits
 			sprite = Cardskin [skin].spadeSprite [rank - 1];
 			break;
-		default :
+        case 2: //Glass
+            //no difference between suits
+            sprite = Cardskin[skin].spadeSprite[rank - 1];
+            break;
+        default :
 			sprite = null;
 			break;
 		}
