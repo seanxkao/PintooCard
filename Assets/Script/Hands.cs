@@ -37,6 +37,7 @@ public class Hands : MonoBehaviour {
 				Deck deck = (Deck)Instantiate (deckP, scroll);
 				Card card = GetComponent<CardSpawner> ().spawnCard (suit, i);
 				card.transform.SetParent (deck.transform);
+				deck.setCard (card);
 			}
 		}
 		//set scroll size
