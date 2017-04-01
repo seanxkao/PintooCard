@@ -89,7 +89,6 @@ public class Board : MonoBehaviour {
 				}
 			}
             string s = "成功!\n完成時間\n" + Timer.text;
-            Debug.Log(s);
             messagebox.showMessage (s);
 		}
 	}
