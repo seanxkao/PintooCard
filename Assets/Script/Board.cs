@@ -11,11 +11,11 @@ public class Board : MonoBehaviour {
 	[SerializeField]	protected Text ruleText;
 	protected GridLayoutGroup grid;
 	protected Deck[,] deck;
-	protected bool win;
+	public static bool win;
 
 	protected virtual void Start () {
-		//initing
-		mapInfo = Manager.manager().getMapInfo();
+        //initing
+        mapInfo = Manager.manager().getMapInfo();
 		setRule (Manager.manager ().getRule());
 		win = false;
 		//setup table, spawn Decks
@@ -33,8 +33,9 @@ public class Board : MonoBehaviour {
 		GetComponent<RectTransform> ().sizeDelta = new Vector2 (mapInfo.row * (grid.cellSize.x + grid.spacing.x), mapInfo.col * (grid.cellSize.y + grid.spacing.y));
 	}
 
-	protected virtual void Update(){
-		check ();
+	protected virtual void Update()
+    {
+        check ();
 	}
 
 	public virtual void check(){
@@ -87,7 +88,9 @@ public class Board : MonoBehaviour {
 					}
 				}
 			}
-			messagebox.showMessage ("成功！");
+            string s = "成功!\n完成時間\n" + Timer.text;
+            Debug.Log(s);
+            messagebox.showMessage (s);
 		}
 	}
 		
