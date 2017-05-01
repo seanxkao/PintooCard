@@ -4,19 +4,25 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour {
+	[SerializeField]	protected Mode mode;
 	[SerializeField]	protected int rule;
 	[SerializeField]	protected MapInfo mapInfo;
 	[SerializeField]	protected Deck deckP;
 	[SerializeField]	protected Messagebox messagebox;
+	[SerializeField]	protected Text titleText;
 	[SerializeField]	protected Text ruleText;
+	[SerializeField]	protected Button finishButton;
+
 	protected GridLayoutGroup grid;
 	protected Deck[,] deck;
 	public static bool win;
 
 	protected virtual void Start () {
         //initing
+
+		mode = Manager.manager ().getMode();
         mapInfo = Manager.manager().getMapInfo();
-		setRule (Manager.manager ().getRule());
+		setRule(Manager.manager ().getRule());
 		win = false;
 		//setup table, spawn Decks
 		grid = GetComponent<GridLayoutGroup>();
@@ -31,30 +37,27 @@ public class Board : MonoBehaviour {
 			}
 		}
 		GetComponent<RectTransform> ().sizeDelta = new Vector2 (mapInfo.row * (grid.cellSize.x + grid.spacing.x), mapInfo.col * (grid.cellSize.y + grid.spacing.y));
+		switch (mode) {
+		case Mode.PUZZLE:
+			titleText.text = "拼圖模式";
+			break;
+		case Mode.FREE:
+			titleText.text = "自由模式";
+			finishButton.gameObject.SetActive (true);
+			break;
+		}
 	}
 
 	protected virtual void Update()
     {
-        check ();
+		if (Manager.manager ().getMode () == Mode.PUZZLE) {
+			checkBoard ();
+			checkWin ();
+		} else {
+			checkBoardFree ();
+		}
 	}
-
-	public virtual void check(){
-		if (win) {
-			return;
-		}
-		win = true;
-		//check if puzzle is finished.
-		//if not, turn all decks that violate the rule into red.
-		for (int i = 0; i < mapInfo.row; i++) {
-			for (int j = 0; j < mapInfo.col; j++) {
-				if (deck [i, j] != null && deck[i, j].getEnable()) {
-					deck [i, j].setWrong (false);
-					if (deck [i, j].card () == null) {
-						win = false;
-					}
-				}
-			}
-		}
+	public virtual void checkRule(){
 		//check horizontal
 		for (int i = 0; i < mapInfo.row; i++) {
 			for (int j = 0; j < mapInfo.col-1; j++) {
@@ -79,6 +82,34 @@ public class Board : MonoBehaviour {
 				}
 			}
 		}
+	
+	}
+
+	public virtual void checkBoard(){
+		if (win) {
+			return;
+		}
+		win = true;
+		//check if puzzle is finished.
+		//if not, turn all decks that violate the rule into red.
+		for (int i = 0; i < mapInfo.row; i++) {
+			for (int j = 0; j < mapInfo.col; j++) {
+				if (deck [i, j] != null && deck[i, j].getEnable()) {
+					deck [i, j].setWrong (false);
+					if (deck [i, j].card () == null) {
+						win = false;
+					}
+				}
+			}
+		}
+		checkRule ();
+	}
+
+	public virtual void checkBoardFree(){
+		checkRule ();
+	}
+
+	public virtual void checkWin(){
 		//if play has won
 		if (win) {
 			for (int i = 0; i < mapInfo.row; i++) {
@@ -88,8 +119,8 @@ public class Board : MonoBehaviour {
 					}
 				}
 			}
-            string s = "成功!\n完成時間\n" + Timer.text;
-            messagebox.showMessage (s);
+			string s = "成功!\n完成時間\n" + Timer.text;
+			messagebox.showMessage (s);
 		}
 	}
 		
@@ -119,6 +150,28 @@ public class Board : MonoBehaviour {
 		return mapInfo.col;
 	}
 
+
+
+	public virtual void finish(){
+		win = true;
+		checkBoardFree ();
+		string s;
+		if (!win) {
+			s = "有卡牌違反規則!\n";
+			messagebox.showMessage (s);
+			return;
+		}
+
+		for (int i = 0; i < mapInfo.row; i++) {
+			for (int j = 0; j < mapInfo.col; j++) {
+				if (deck [i, j].isMatchable()) {
+					deck [i, j].card ().enabled = false;
+				}
+			}
+		}
+		s = "結束!\n完成時間\n" + Timer.text;
+		messagebox.showMessage (s);
+	}
 
 	//this may be used one day...
 	/*

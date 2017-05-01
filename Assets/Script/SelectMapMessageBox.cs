@@ -13,4 +13,8 @@ public class SelectMapMessageBox : Messagebox {
 			}); 
 		}
 	}
+
+	public void setMapMode(int mode){
+		Manager.manager().setMode((Mode)mode);
+	}
 }

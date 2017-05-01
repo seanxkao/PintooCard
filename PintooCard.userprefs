@@ -1,10 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Hands.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Board.cs">
     <Files>
-      <File FileName="Assets\Script\Board.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Hands.cs" Line="40" Column="25" />
+      <File FileName="Assets\Script\Board.cs" Line="164" Column="3" />
+      <File FileName="Assets\Script\Hands.cs" Line="28" Column="3" />
       <File FileName="Assets\Script\Card.cs" Line="194" Column="25" />
+      <File FileName="Assets\Script\SelectSkinMessageBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Timer.cs" Line="20" Column="50" />
+      <File FileName="Assets\Script\Manager.cs" Line="48" Column="37" />
+      <File FileName="Assets\Script\SelectMapMessageBox.cs" Line="17" Column="35" />
+      <File FileName="Assets\Script\SelectRuleMessagebox.cs" Line="8" Column="15" />
+      <File FileName="Assets\Script\MapInfo.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

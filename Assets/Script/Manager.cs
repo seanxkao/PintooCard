@@ -2,11 +2,17 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+public enum Mode{
+	PUZZLE,
+	FREE
+}
+
 public class Manager : MonoBehaviour {
 	protected static Manager m;
 	protected MapInfo mapInfo;
 	protected int rule;
 	protected int skin; //0:Original, 1:V_butterfly
+	protected Mode mode; 
 
     void Awake(){
 		//Manager is singleton.
@@ -33,6 +39,19 @@ public class Manager : MonoBehaviour {
 	}
 		
 	public void loadPuzzleMode(){
+		if (mode == Mode.FREE) {
+			mapInfo = new MapInfo();
+			mapInfo.row = 9;
+			mapInfo.col = 9;
+			mapInfo.enable = new Row[9];
+			for (int i = 0; i < 9; i++) {
+				mapInfo.enable [i] = new Row ();
+				mapInfo.enable[i].cell = new bool[9];
+				for (int j = 0; j < 9; j++) {
+					mapInfo.enable[i].cell[j] = true;
+				}
+			}
+		}
 		SceneManager.LoadScene ("puzzle_mode");
 	}
 
@@ -40,6 +59,7 @@ public class Manager : MonoBehaviour {
 		this.rule = rule;
 		loadPuzzleMode ();
 	}
+
 
 	public void loadMainMenu(){
 		SceneManager.LoadScene ("main_menu");
@@ -59,5 +79,13 @@ public class Manager : MonoBehaviour {
 	}
 	public void setMapInfo(MapInfo mapInfo){
 		this.mapInfo = mapInfo;
+	}
+
+	public void setMode(Mode mode){
+		this.mode = mode;
+	}
+
+	public Mode getMode(){
+		return mode;
 	}
 }

@@ -55,9 +55,11 @@
      <Compile Include="Assets\Script\MapInfo.cs" />
      <Compile Include="Assets\Script\Messagebox.cs" />
      <Compile Include="Assets\Script\PauseMessagebox.cs" />
+     <Compile Include="Assets\Script\PreviewSkin.cs" />
      <Compile Include="Assets\Script\SelectMapMessageBox.cs" />
      <Compile Include="Assets\Script\SelectRuleMessagebox.cs" />
      <Compile Include="Assets\Script\SelectSkinMessageBox.cs" />
+     <Compile Include="Assets\Script\Timer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
