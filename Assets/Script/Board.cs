@@ -31,9 +31,26 @@ public class Board : MonoBehaviour {
 		deck = new Deck[mapInfo.row, mapInfo.col];
 		for (int i = 0; i < mapInfo.row; i++) {
 			for (int j = 0; j < mapInfo.col; j++) {
-					deck [i, j] = (Deck)Instantiate (deckP);
-					deck [i, j].transform.SetParent (transform, false);
-					deck [i, j].setDeckType (mapInfo.type [i].cell [j]);
+				deck [i, j] = (Deck)Instantiate (deckP);
+				deck [i, j].transform.SetParent (transform, false);
+				deck [i, j].setDeckType (mapInfo.type [i].cell [j]);
+				//set deck frame
+				//free mode has gird, others do not
+				if (mapInfo.hasGrid) {
+					if (i % 3 == 0 && j % 3 == 0) {
+						deck [i, j].setDeckFrame (DeckFrame.TOPLEFT);
+					} else if (i % 3 == 0 && j % 3 == 2) {
+						deck [i, j].setDeckFrame (DeckFrame.TOPRIGHT);
+					} else if (i % 3 == 2 && j % 3 == 0) {
+						deck [i, j].setDeckFrame (DeckFrame.BOTLEFT);
+					} else if (i % 3 == 2 && j % 3 == 2) {
+						deck [i, j].setDeckFrame (DeckFrame.BOTRIGHT);
+					} else {
+						deck [i, j].setDeckFrame (DeckFrame.NORMAL);
+					}
+				} else {
+					deck [i, j].setDeckFrame (DeckFrame.NORMAL);
+				}
 			}
 		}
 		GetComponent<RectTransform> ().sizeDelta = new Vector2 (mapInfo.row * (grid.cellSize.x + grid.spacing.x), mapInfo.col * (grid.cellSize.y + grid.spacing.y));

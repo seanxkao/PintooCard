@@ -8,10 +8,33 @@ public class Row{
 
 [System.Serializable]
 public class MapInfo {
+	[SerializeField]	protected bool mHasGrid;
 	[SerializeField]	protected int mRow;
 	[SerializeField]	protected int mCol;
 	[SerializeField]	protected Row[] mType;
 
+	public MapInfo(int row, int col, bool hasGrid){
+		mHasGrid = hasGrid;
+		mRow = row;
+		mCol = col;
+		mType = new Row[row];
+		for (int i = 0; i < row; i++) {
+			mType[i] = new Row();
+			mType[i].cell = new DeckType[col];
+			for (int j = 0; j < col; j++) {
+				mType[i].cell[j] = DeckType.NORMAL;
+			}
+		}
+	}
+
+	public bool hasGrid{
+		get{ 
+			return mHasGrid;
+		}
+		set{ 
+			mHasGrid = value;
+		}
+	}
 	public int row{
 		get{ 
 			return mRow;

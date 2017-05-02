@@ -40,17 +40,7 @@ public class Manager : MonoBehaviour {
 		
 	public void loadPuzzleMode(){
 		if (mode == Mode.FREE) {
-			mapInfo = new MapInfo();
-			mapInfo.row = 9;
-			mapInfo.col = 9;
-			mapInfo.type = new Row[9];
-			for (int i = 0; i < 9; i++) {
-				mapInfo.type [i] = new Row ();
-				mapInfo.type[i].cell = new DeckType[9];
-				for (int j = 0; j < 9; j++) {
-					mapInfo.type[i].cell[j] = DeckType.NORMAL;
-				}
-			}
+			mapInfo = new MapInfo(9, 9, true);
 		}
 		SceneManager.LoadScene ("puzzle_mode");
 	}
@@ -88,4 +78,5 @@ public class Manager : MonoBehaviour {
 	public Mode getMode(){
 		return mode;
 	}
+
 }
