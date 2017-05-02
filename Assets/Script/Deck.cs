@@ -3,12 +3,19 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum DeckType{
+	NORMAL,
+	TEMP,
+	HIDDEN
+}
+
 public class Deck : MonoBehaviour
 {
 	[SerializeField]	protected Card c;
 	[SerializeField]	protected bool wrong;
-	[SerializeField]	protected bool enable;
+	[SerializeField]	protected DeckType type;
 	protected Color normalColor;
+	protected Color tempColor;
 	protected Color wrongColor;
 	protected Color noColor;
 
@@ -16,6 +23,7 @@ public class Deck : MonoBehaviour
 		//adjust size with respect to screen size
 		GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width/3, Screen.width/2);
 		normalColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+		tempColor = new Color(0f, 0f, 0.4f, 0.5f);
 		wrongColor = new Color(1f, 0f, 0f, 0.5f);
 		noColor = new Color (0f, 0f, 0f, 0f);
 		setWrong (false);
@@ -25,15 +33,37 @@ public class Deck : MonoBehaviour
 		//if Deck is a hole, hide the Deck.
 		//if Deck is not a hole and the Card is placed wrong, turn red.
 		//otherwise, show the normal color
-		GetComponent<Image> ().color = enable? (wrong ? wrongColor : normalColor):noColor;
+		Color color;
+		switch(type){
+		case DeckType.NORMAL:
+			color = normalColor;
+			break;
+		case DeckType.TEMP:
+			color = tempColor;
+			break;
+		case DeckType.HIDDEN:
+			color = noColor;
+			break;
+		default:
+			color = normalColor;
+			break;
+		}
+
+		if (wrong && color != noColor)
+			color = wrongColor;
+		GetComponent<Image> ().color = color;
 	}
 
-	public void setEnable(bool enable){
-		this.enable = enable;
+	public void setDeckType(DeckType type){
+		this.type= type;
+	}
+
+	public DeckType getDeckType(){
+		return type;
 	}
 
 	public bool getEnable(){
-		return enable;
+		return type != DeckType.HIDDEN;
 	}
 
 	public void setSize(Vector2 size){
@@ -57,7 +87,7 @@ public class Deck : MonoBehaviour
 	}
 
 	public virtual bool isMatchable(){
-		return enable && c != null;
+		return getEnable() && c != null;
 	}
 
 }

@@ -2,15 +2,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Board.cs">
     <Files>
-      <File FileName="Assets\Script\Board.cs" Line="164" Column="3" />
-      <File FileName="Assets\Script\Hands.cs" Line="28" Column="3" />
-      <File FileName="Assets\Script\Card.cs" Line="194" Column="25" />
-      <File FileName="Assets\Script\SelectSkinMessageBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Timer.cs" Line="20" Column="50" />
-      <File FileName="Assets\Script\Manager.cs" Line="48" Column="37" />
-      <File FileName="Assets\Script\SelectMapMessageBox.cs" Line="17" Column="35" />
-      <File FileName="Assets\Script\SelectRuleMessagebox.cs" Line="8" Column="15" />
-      <File FileName="Assets\Script\MapInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Board.cs" Line="55" Column="4" />
+      <File FileName="Assets\Script\Hands.cs" Line="29" Column="1" />
+      <File FileName="Assets\Script\Card.cs" Line="237" Column="6" />
+      <File FileName="Assets\Script\Timer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Manager.cs" Line="1" Column="4" />
+      <File FileName="Assets\Script\MapInfo.cs" Line="46" Column="46" />
+      <File FileName="Assets\Script\Deck.cs" Line="61" Column="17" />
+      <File FileName="Assets\Script\CardSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\MapController.cs" Line="89" Column="37" />
+      <File FileName="Assets\Script\Messagebox.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -3,14 +3,14 @@ using System.Collections;
 
 [System.Serializable]
 public class Row{
-	public bool[] cell;
+	public DeckType[] cell;
 }
 
 [System.Serializable]
 public class MapInfo {
 	[SerializeField]	protected int mRow;
 	[SerializeField]	protected int mCol;
-	[SerializeField]	protected Row[] mEnable;
+	[SerializeField]	protected Row[] mType;
 
 	public int row{
 		get{ 
@@ -30,12 +30,12 @@ public class MapInfo {
 		}
 	}
 
-	public Row[] enable{
+	public Row[] type{
 		get{ 
-			return mEnable;
+			return mType;
 		}
 		set{ 
-			mEnable = value;
+			mType = value;
 		}
 	}
 
@@ -43,7 +43,7 @@ public class MapInfo {
 		int count = 0;
 		for(int i=0;i<row;i++){
 			for(int j=0;j<col;j++){
-				if (mEnable [i].cell [j]) {
+				if (mType [i].cell [j] == DeckType.NORMAL) {
 					count++;
 				}
 			}

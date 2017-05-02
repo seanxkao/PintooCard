@@ -43,12 +43,12 @@ public class Manager : MonoBehaviour {
 			mapInfo = new MapInfo();
 			mapInfo.row = 9;
 			mapInfo.col = 9;
-			mapInfo.enable = new Row[9];
+			mapInfo.type = new Row[9];
 			for (int i = 0; i < 9; i++) {
-				mapInfo.enable [i] = new Row ();
-				mapInfo.enable[i].cell = new bool[9];
+				mapInfo.type [i] = new Row ();
+				mapInfo.type[i].cell = new DeckType[9];
 				for (int j = 0; j < 9; j++) {
-					mapInfo.enable[i].cell[j] = true;
+					mapInfo.type[i].cell[j] = DeckType.NORMAL;
 				}
 			}
 		}
