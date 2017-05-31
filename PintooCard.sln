@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{B5EE49B3-592E-7FEB-D320-B7643165B7A3}") = "PintooCard", "Assembly-CSharp.csproj", "{071E72CB-083B-C3AC-C379-8C1CD19564C5}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PintooCard", "Assembly-CSharp.csproj", "{071E72CB-083B-C3AC-C379-8C1CD19564C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

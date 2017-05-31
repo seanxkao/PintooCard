@@ -8,7 +8,8 @@ public class Board : MonoBehaviour {
 	[SerializeField]	protected int rule;
 	[SerializeField]	protected MapInfo mapInfo;
 	[SerializeField]	protected Deck deckP;
-	[SerializeField]	protected Messagebox messagebox;
+	[SerializeField]	protected Messagebox pauseMessagebox;
+	[SerializeField]	protected Messagebox wrongMessagebox;
 	[SerializeField]	protected Text titleText;
 	[SerializeField]	protected Text ruleText;
 	[SerializeField]	protected Button finishButton;
@@ -149,7 +150,7 @@ public class Board : MonoBehaviour {
 				}
 			}
 			string s = "成功!\n完成時間\n" + Timer.text;
-			messagebox.showMessage (s);
+			pauseMessagebox.showMessage (s);
 		}
 	}
 		
@@ -187,7 +188,7 @@ public class Board : MonoBehaviour {
 		string s;
 		if (!win) {
 			s = "有卡牌違反規則!\n";
-			messagebox.showMessage (s);
+			wrongMessagebox.showMessage (s);
 			return;
 		}
 
@@ -199,7 +200,7 @@ public class Board : MonoBehaviour {
 			}
 		}
 		s = "結束!\n完成時間\n" + Timer.text;
-		messagebox.showMessage (s);
+		pauseMessagebox.showMessage (s);
 	}
 
 	//this may be used one day...

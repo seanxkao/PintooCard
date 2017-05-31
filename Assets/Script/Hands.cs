@@ -36,7 +36,7 @@ public class Hands : MonoBehaviour {
 			for (int i = 1; i <= 9; i++) {
 				Deck deck = (Deck)Instantiate (deckP, scroll);
 				Card card = GetComponent<CardSpawner> ().spawnCard (suit, i);
-				card.transform.SetParent (deck.transform);
+				card.transform.SetParent (deck.transform, false);
 				deck.setCard (card);
 			}
 		}
