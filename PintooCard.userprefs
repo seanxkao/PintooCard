@@ -1,19 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Hands.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\WrongMessagebox.cs">
     <Files>
-      <File FileName="Assets\Script\Board.cs" Line="7" Column="33" />
-      <File FileName="Assets\Script\Hands.cs" Line="39" Column="52" />
-      <File FileName="Assets\Script\Card.cs" Line="237" Column="6" />
-      <File FileName="Assets\Script\Timer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Manager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\MapInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Deck.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\CardSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\MapController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Messagebox.cs" Line="13" Column="1" />
+      <File FileName="Assets\Script\Messagebox.cs" Line="5" Column="42" />
       <File FileName="Assets\Script\PauseMessagebox.cs" Line="10" Column="1" />
       <File FileName="Assets\Script\WrongMessagebox.cs" Line="5" Column="42" />
+      <File FileName="Assets\Script\SelectSkinMessageBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\SelectPuzzleRuleMessagebox.cs" Line="9" Column="11" />
+      <File FileName="Assets\Script\SelectFreeRuleMessagebox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\TutorialMessagebox.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
